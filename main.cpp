@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include<math.h>
 #include <mutex>
-#define NUM_THREADS 4
+#define NUM_THREADS 18
 typedef struct{
 	pthread_mutex_t lok;
     int tid = 0;
@@ -51,25 +51,6 @@ bool GetFileNames(std::vector<std::string> &file_names_, const std::string direc
     return true;
 }
 
-//void *PrintHello(void *threadid)
-//{
-//    pthread_mutex_lock(&tmp.lok);//lock
-//    std::vector<std::string> new_id;
-//    int tid_1 = tmp.tid;
-//    new_id = tmp.file_names_all[tid_1];
-//    std::vector<std::string> file_names_sub_1;
-//
-//    for (int i = 0; i < new_id.size(); ++i) {
-//        file_names_sub_1.push_back(new_id[i]);
-//    }
-//    pthread_mutex_unlock(&tmp.lok);//unlock
-//
-//    mapping M;
-//    std::cout<<" 2 "<<tid_1<<std::endl;
-//    M.init_mapping(file_names_sub_1,tid_1);
-//    M.start_mapping();
-//    pthread_exit(NULL);
-//}
 
 
 void *mapping_thread(void *ptr ) {
@@ -86,7 +67,6 @@ int main() {
     std::string PcdPath = "/home/echo/pcd/pcd";
     GetFileNames(file_names,PcdPath);
     MappingParams *MappingParamPtr;
-//    std::vector<MappingParams> ParamVector;
 
     float divided_num = file_names.size()/NUM_THREADS;
 
@@ -94,7 +74,7 @@ int main() {
         int floor_num = floor(i * divided_num);
         int top_num = floor((i + 1) * divided_num);
         if (i == NUM_THREADS - 1) {
-            top_num = file_names.size();
+            top_num = file_names.size() -1;
         }
         tmp.file_names_all.push_back(std::vector<std::string>(file_names.begin() + floor_num, file_names.begin() + top_num));
         MappingParams temp;

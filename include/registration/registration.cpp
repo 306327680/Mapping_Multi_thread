@@ -4,61 +4,6 @@
 
 #include "registration.h"
 
-/*void registration::setParam(std::string configFileName) {
-	std::ifstream ifs(configFileName.c_str());
-
-	if (ifs.good())
-	{
-		icp.loadFromYaml(ifs);
-	}
-	else
-	{
-		std::cout<<"Cannot load ICP config from YAML file " << configFileName<<std::endl;
-		icp.setDefault();
-	}
-}
-
-void registration::setMap(pcl::PointCloud<pcl::PointXYZI> pcin) {
-
-	Eigen::MatrixXf testCloudP(4,pcin.size());
-	for (int i = 0; i < pcin.size(); ++i) {
-		
-		testCloudP(0,i) = pcin[i].x;
-		testCloudP(1,i) = pcin[i].y;
-		testCloudP(2,i) = pcin[i].z;
-		testCloudP(3,i) = 1.f;
-	}
-	DP::Labels labels;
-	labels.push_back(DP::Label("X",1));
-	labels.push_back(DP::Label("Y",1));
-	labels.push_back(DP::Label("Z",1));
-	DP localMap(testCloudP,labels);
-
-	icp.setMap(localMap);
-
-}
-
-PM::TransformationParameters  registration::setScan(pcl::PointCloud<pcl::PointXYZI> pcin) {
-	PM::TransformationParameters icp_result,T_scanner_to_localMap;
-	Eigen::MatrixXf testCloudP(4,pcin.size());
-	for (int i = 0; i < pcin.size(); ++i) {
-		
-		testCloudP(0,i) = pcin[i].x;
-		testCloudP(1,i) = pcin[i].y;
-		testCloudP(2,i) = pcin[i].z;
-		testCloudP(3,i) = 1.f;
-	}
-	DP::Labels labels;
-	labels.push_back(DP::Label("X",1));
-	labels.push_back(DP::Label("Y",1));
-	labels.push_back(DP::Label("Z",1));
-	DP newPointCloud(testCloudP,labels);
-	
-	const int dimp1(newPointCloud.features.rows());
-	T_scanner_to_localMap = PM::TransformationParameters::Identity(dimp1, dimp1);
-	icp_result = icp(newPointCloud, T_scanner_to_localMap);
-	return icp_result;
-}*/
 //给一个点云添加normal
 void registration::addNormal(pcl::PointCloud<pcl::PointXYZI>::Ptr cloud,
 							 pcl::PointCloud<pcl::PointXYZINormal>::Ptr cloud_with_normals) {

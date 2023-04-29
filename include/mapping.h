@@ -21,7 +21,9 @@
 #include "g2oIO/PoseGraphIO.h"
 #include "registration/registration.h"
 #include <chrono>
-
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/filters/uniform_sampling.h>
+#include "CSV/CSVio.h"
 //EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::Matrix4d)
 //EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::Isometry3d)
 class mapping {
@@ -53,6 +55,11 @@ private:
     void qinterp(Eigen::Vector4d &Q1, Eigen::Vector4d &Q2, double r,
                           Eigen::Vector4d &q_quaternion_interpolation) ;
     void quatern2rotMat(Eigen::Vector4d &q_quaternion, Eigen::Matrix3d &R);
+    pcl::PointCloud<pcl::PointXYZI> lidarLocalMapDistance(std::vector<Eigen::Matrix4f> &poses,
+                                                                   std::vector<pcl::PointCloud<pcl::PointXYZI>> &clouds,
+                                                                   double distiance, int buffer_size,
+                                                                   bool &local_map_updated,
+                                                                   pcl::PointCloud<pcl::PointXYZI> last_local_map);
 };
 
 
